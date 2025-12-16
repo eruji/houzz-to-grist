@@ -12,3 +12,7 @@ houzz_import*.csv
 
 # System
 Thumbs.db
+
+# Local Tools
+*.bat
+inspect_excel.py
