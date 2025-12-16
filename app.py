@@ -51,21 +51,13 @@ def main():
                 csv_data = df_result.to_csv(index=False).encode('utf-8')
                 csv_text = df_result.to_csv(index=False)
                 
-                col_actions1, col_actions2 = st.columns(2)
-                
-                with col_actions1:
-                    st.download_button(
-                        label="⬇️ Download CSV",
-                        data=csv_data,
-                        file_name='houzz_import.csv',
-                        mime='text/csv',
-                        type="primary"
-                    )
-                
-                with col_actions2:
-                   st.markdown("### Copy for Grist")
-                   st.markdown("Click the copy button in the top right of the code block below:")
-                   st.code(csv_text, language='csv')
+                st.download_button(
+                    label="⬇️ Download CSV",
+                    data=csv_data,
+                    file_name='houzz_import.csv',
+                    mime='text/csv',
+                    type="primary"
+                )
 
             except Exception as e:
                 st.error(f"Error during conversion: {e}")
