@@ -58,7 +58,7 @@ def extract_vendor_from_url(url):
     except:
         return ''
 
-def get_row_data(project_name, proposal_number, houzz_row):
+def get_row_data(proposal_number, houzz_row):
     """
     Extract and process data for a single row
     Returns a dictionary of all available data points
@@ -92,9 +92,7 @@ def get_row_data(project_name, proposal_number, houzz_row):
     # We map potential Grist column names to our values here
     data = {
         # Identity
-        'Project': project_name,
         'Proposal': proposal_number,
-        'imported project': project_name,
         
         # Core Item Data
         'Item': item_name,
@@ -140,7 +138,7 @@ def get_row_data(project_name, proposal_number, houzz_row):
     
     return data
 
-def convert_houzz_to_grist(houzz_file, output_file=None, project_name="", proposal_number="", template_csv="ORDERS.csv"):
+def convert_houzz_to_grist(houzz_file, output_file=None, proposal_number="", template_csv="ORDERS.csv"):
     """
     Convert Houzz export to Grist format using template CSV for column structure.
     If output_file is None, simply returns the DataFrame.
@@ -224,7 +222,7 @@ def convert_houzz_to_grist(houzz_file, output_file=None, project_name="", propos
         else:
             print(f"Template file {template_csv} not found. Using default schema.")
             target_columns = [
-                'Project', 'Proposal', 'Ordered', 'Item', 'Vendor', 'QTY', 'Unit COST', 
+                'Proposal', 'Ordered', 'Item', 'Vendor', 'QTY', 'Unit COST', 
                 'Markup%', 'Markup', 'Subtotal', 'Pre-Tax', 'Shipping', 'Total', 
                 'Prepaid Tax?', 'Project Tax Rate', 'Tax', 'Prepaid Tax Amt', 
                 'Created', 'Notes', 'Project_Project Tax Rate', 'Received', 'URL'
@@ -234,7 +232,7 @@ def convert_houzz_to_grist(houzz_file, output_file=None, project_name="", propos
         # Fallback to the full known schema so the user still gets a usable result
         # even if ORDERS.csv is locked or missing.
         target_columns = [
-            'Project', 'Proposal', 'Ordered', 'Item', 'Vendor', 'QTY', 'Unit COST', 
+            'Proposal', 'Ordered', 'Item', 'Vendor', 'QTY', 'Unit COST', 
             'Markup%', 'Markup', 'Subtotal', 'Pre-Tax', 'Shipping', 'Total', 
             'Prepaid Tax?', 'Project Tax Rate', 'Tax', 'Prepaid Tax Amt', 
             'Created', 'Notes', 'Project_Project Tax Rate', 'Received', 'URL'
@@ -244,7 +242,7 @@ def convert_houzz_to_grist(houzz_file, output_file=None, project_name="", propos
     rows = []
     for idx, houzz_row in df_houzz.iterrows():
         # Get all potential data matches
-        row_data = get_row_data(project_name, proposal_number, houzz_row)
+        row_data = get_row_data(proposal_number, houzz_row)
         
         # Build the ordered row based on target columns
         ordered_row = {}
@@ -274,7 +272,6 @@ if __name__ == "__main__":
     # Default values
     houzz_file = "Paxman DDS_ Art_12_16_2025.xlsx"
     output_file = "houzz_import.csv"
-    project_name = "Paxman DDS"
     proposal_number = "Art_12_16_2025"
     template_file = "ORDERS.csv"
     
@@ -284,9 +281,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         output_file = sys.argv[2]
     if len(sys.argv) > 3:
-        project_name = sys.argv[3]
-    if len(sys.argv) > 4:
-        proposal_number = sys.argv[4]
+        proposal_number = sys.argv[3]
     
     print("=" * 60)
     print("Houzz to Grist Converter (Dynamic Schema)")
@@ -296,5 +291,5 @@ if __name__ == "__main__":
     print(f"Template: {template_file}")
     print("=" * 60)
     
-    result = convert_houzz_to_grist(houzz_file, output_file, project_name, proposal_number, template_file)
+    result = convert_houzz_to_grist(houzz_file, output_file, proposal_number, template_file)
 
