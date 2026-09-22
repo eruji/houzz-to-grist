@@ -1,0 +1,4 @@
+[build]
+  publish = "site"
+
+# No build step needed — the site is plain static files.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Houzz → Grist Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Houzz → Grist Converter</h1>
+      <p class="sub">Convert a Houzz Pro proposal export (Excel) into Grist import format — instantly, in your browser.</p>
+    </header>
+
+    <section class="card">
+      <label class="field">
+        <span>Proposal #</span>
+        <input id="proposal" type="text" placeholder="e.g. Art_12_16" autocomplete="off" />
+      </label>
+
+      <label class="dropzone" id="dropzone">
+        <input id="file" type="file" accept=".xlsx,.xls" hidden />
+        <span class="dz-title">Drop your Houzz Excel file here</span>
+        <span class="dz-sub">or click to browse (.xlsx / .xls)</span>
+        <span class="dz-name" id="fileName"></span>
+      </label>
+
+      <p class="hint" id="hint">Your file never leaves this page — everything is converted locally.</p>
+    </section>
+
+    <section id="results" class="card hidden">
+      <div class="results-head">
+        <h2 id="resultsTitle">Result</h2>
+        <div class="actions">
+          <button id="downloadBtn" class="btn primary">⬇️ Download CSV</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table id="preview"></table>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-head">
+          <h3>Copy for Grist</h3>
+          <button id="copyBtn" class="btn">📋 Copy (no headers)</button>
+        </div>
+        <textarea id="tsv" readonly rows="8" spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <footer>
+      <p>No server, no uploads, no timeouts — runs 100% client-side.</p>
+    </footer>
+  </main>
+
+  <script src="lib/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
