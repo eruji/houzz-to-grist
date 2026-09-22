@@ -16,3 +16,6 @@ Thumbs.db
 # Local Tools
 *.bat
 inspect_excel.py
+
+# Local Netlify folder
+.netlify
