@@ -204,12 +204,11 @@ if (typeof document !== "undefined") {
   const resultsEl = $("results");
   const resultsTitle = $("resultsTitle");
   const previewEl = $("preview");
-  const tsvEl = $("tsv");
-  const downloadBtn = $("downloadBtn");
   const copyBtn = $("copyBtn");
 
   let currentFile = null;
   let currentRows = [];
+  let currentTsv = "";
 
   function setHint(text, isError) {
     hintEl.textContent = text;
@@ -264,7 +263,7 @@ if (typeof document !== "undefined") {
     }
     previewEl.appendChild(tbody);
 
-    tsvEl.value = toTsvNoHeader(rows);
+    currentTsv = toTsvNoHeader(rows);
     resultsEl.classList.remove("hidden");
   }
 
@@ -297,26 +296,21 @@ if (typeof document !== "undefined") {
     }
   });
 
-  downloadBtn.addEventListener("click", () => {
-    const csv = toCsv(currentRows);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "houzz_import.csv";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  });
-
   copyBtn.addEventListener("click", async () => {
+    const old = copyBtn.textContent;
     try {
-      await navigator.clipboard.writeText(tsvEl.value);
-      const old = copyBtn.textContent;
-      copyBtn.textContent = "✅ Copied!";
-      setTimeout(() => (copyBtn.textContent = old), 1500);
+      await navigator.clipboard.writeText(currentTsv);
     } catch {
-      tsvEl.select();
+      const ta = document.createElement("textarea");
+      ta.value = currentTsv;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
       document.execCommand("copy");
+      ta.remove();
     }
+    copyBtn.textContent = "✅ Copied!";
+    setTimeout(() => (copyBtn.textContent = old), 1500);
   });
 }

@@ -104,20 +104,4 @@ th {
 }
 tbody tr:nth-child(even) { background: #161d2c; }
 
-.copy-block { margin-top: 20px; }
-.copy-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.copy-head h3 { margin: 0 0 8px; font-size: 15px; }
-.copy-block textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #101623;
-  color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 12px;
-  resize: vertical;
-}
-
 footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 34px; }
