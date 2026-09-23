@@ -119,7 +119,7 @@ def get_row_data(proposal_number, houzz_row):
         'Total': '',
         'Tax': '',
         'Prepaid Tax?': '', # User requested to leave blank
-        'Project Tax Rate': '', # User requested to leave blank
+        'Project Tax Rate': '0',
         'Prepaid Tax Amt': '',
         'Owed State Tax Amt': '',
         

@@ -109,7 +109,7 @@ function getRowData(proposalNumber, row) {
     Total: "",
     Tax: "",
     "Prepaid Tax?": "",
-    "Project Tax Rate": "",
+    "Project Tax Rate": "0",
     "Prepaid Tax Amt": "",
     "Owed State Tax Amt": "",
     Ordered: ordered,
