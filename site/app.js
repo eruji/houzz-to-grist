@@ -4,7 +4,7 @@
 
 // Column layout from ORDERS.csv (the Grist import template).
 const TARGET_COLUMNS = [
-  "Project", "Proposal", "Ordered", "Item", "Vendor", "QTY", "Unit COST",
+  "Proposal", "Ordered", "Item", "Vendor", "QTY", "Unit COST",
   "Markup%", "Markup", "Subtotal", "Pre-Tax", "Shipping", "Total",
   "Prepaid Tax?", "Project Tax Rate", "Tax", "Prepaid Tax Amt", "Created",
   "Notes", "Project_Project Tax Rate", "Received", "URL",

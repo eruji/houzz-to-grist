@@ -62,7 +62,10 @@ python houzz_to_grist.py "input.xlsx" "houzz_import.csv" "Art_12_16"
 
 The output columns are fixed to the `ORDERS.csv` header:
 
-`Project, Proposal, Ordered, Item, Vendor, QTY, Unit COST, Markup%, Markup, Subtotal, Pre-Tax, Shipping, Total, Prepaid Tax?, Project Tax Rate, Tax, Prepaid Tax Amt, Created, Notes, Project_Project Tax Rate, Received, URL`
+`Proposal, Ordered, Item, Vendor, QTY, Unit COST, Markup%, Markup, Subtotal, Pre-Tax, Shipping, Total, Prepaid Tax?, Project Tax Rate, Tax, Prepaid Tax Amt, Created, Notes, Project_Project Tax Rate, Received, URL`
+
+> **Note:** `Project` is intentionally excluded — it's derived in Grist, so it's
+> not part of the pasted/imported data.
 
 If your Grist template columns change, edit the `TARGET_COLUMNS` array at the
 top of `site/app.js` (and `ORDERS.csv` for the Python version).
